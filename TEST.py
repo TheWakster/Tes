@@ -1,32 +1,46 @@
 import RPi.GPIO as GPIO
-from time import sleep
+import time
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
 
-PWR1,ENA1,IN1,IN2,GND = 2,33,31,29,39
-GPIO.setup(ENA1, GPIO.OUT)
-GPIO.setup(IN1, GPIO.OUT)
-GPIO.setup(IN2, GPIO.OUT)
-PWMA = GPIO.PWM(ENA1,100)
-PWMA.start(0)
+en1=18
+in1=15
+in2=14
 
-PWR1,ENA2,IN3,IN4,GND = 4,32,18,16,34
-GPIO.setup(ENA2, GPIO.OUT)
-GPIO.setup(IN3, GPIO.OUT)
-GPIO.setup(IN4, GPIO.OUT)
-PWMA = GPIO.PWM(ENA2,100)
-PWMA.start(0)
+GPIO.setup(en1, GPIO.OUT)
+GPIO.setup(in1, GPIO.OUT)
+GPIO.setup(in2, GPIO.OUT)
+GPIO.output(en1, 1)
 
-PWMA.ChangeDutyCycle(30)
-sleep(5)
-GPIO.output(IN1,GPIO.HIGH)
-sleep(5)
-GPIO.output(IN2,GPIO.LOW)
-
-PWMA.ChangeDutyCycle(30)
-sleep(5)
-GPIO.output(IN3,GPIO.LOW)
-sleep(5)
-GPIO.output(IN4,GPIO.HIGH)
-
+while True:
+    print "1"
+    for x in range(100):
+        GPIO.output(in1, 1)
+        GPIO.output(in2, 0)
+        time.sleep(0.02)
+        GPIO.output(in1, 0)
+        GPIO.output(in1, 0)
+        time.sleep(0.02)
+    print "2"
+    for x in range(100):
+        GPIO.output(in1, 1)
+        GPIO.output(in2, 0)
+        time.sleep(0.04)
+        GPIO.output(in1, 0)
+        GPIO.output(in1, 0)
+        time.sleep(0.02)
+    print "3"
+    for x in range(100):
+        GPIO.output(in1, 1)
+        GPIO.output(in2, 0)
+        time.sleep(0.06)
+        GPIO.output(in1, 0)
+        GPIO.output(in1, 0)
+        time.sleep(0.02)
+    print "4"
+    for x in range(100):
+        GPIO.output(in1, 1)
+        GPIO.output(in2, 0)
+        time.sleep(0.02)
 GPIO.cleanup()
